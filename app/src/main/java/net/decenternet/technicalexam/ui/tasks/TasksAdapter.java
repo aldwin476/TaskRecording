@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,12 +31,13 @@ public class TasksAdapter extends
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView taskDescription;
-        public Button messageButton;
+        public CheckBox isTaskCompleted;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             taskDescription = itemView.findViewById(R.id.task_name);
+            isTaskCompleted = itemView.findViewById(R.id.cb_task_completed);
         }
 
 
@@ -58,8 +59,8 @@ public class TasksAdapter extends
     @Override
     public void onBindViewHolder(TasksAdapter.ViewHolder holder, int position) {
         Task task = taskList.get(position);
-        TextView textView = holder.taskDescription;
-        textView.setText(task.getName());
+        holder.isTaskCompleted.setChecked(task.getIsCompleted());
+        holder.taskDescription.setText(task.getName());
     }
 
     @Override
